@@ -8,6 +8,8 @@ exports.up = function(knex, Promise) {
     table.string('email');
     table.boolean('note_attached');
     table.boolean('timed_activity');
+    table.boolean('clicked');
+    table.boolean('selected')
   })
 };
 

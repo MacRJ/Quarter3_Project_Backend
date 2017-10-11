@@ -9,6 +9,17 @@ router.get('/', function(req, res, next) {
     res.json(data.rows)
   })
 })
+// Clicked on an Email
 
+router.post('/clicked/:id', (req, res, next ) => {
+  console.log('clickedRoute', req.params.id)
+  knex.raw(`update emails set clicked = not clicked where id = ${req.params.id}`)
+  .then(data => {
+    knex.raw(`SELECT * FROM emails`)
+    .then(data => {
+      res.json(data.rows)
+    })
+  })
+})
 
 module.exports = router;
