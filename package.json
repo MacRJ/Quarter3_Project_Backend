@@ -6,8 +6,10 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "bcrypt": "^1.0.3",
     "body-parser": "~1.17.1",
     "cookie-parser": "^1.4.3",
+    "cookies": "^0.7.1",
     "cors": "^2.8.4",
     "debug": "~2.6.3",
     "express": "~4.15.2",
