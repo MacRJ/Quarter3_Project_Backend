@@ -4,7 +4,7 @@ var knex = require('../db/knex.js')
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  knex.raw(`SELECT * FROM emails`)
+  knex.raw(`SELECT * FROM emails ORDER BY id`)
   .then(data => {
     res.json(data.rows)
   })
@@ -12,8 +12,18 @@ router.get('/', function(req, res, next) {
 // Clicked on an Email
 
 router.post('/clicked/:id', (req, res, next ) => {
-  console.log('clickedRoute', req.params.id)
   knex.raw(`update emails set clicked = not clicked where id = ${req.params.id}`)
+  .then(data => {
+    knex.raw(`SELECT * FROM emails ORDER BY id`)
+    .then(data => {
+      res.json(data.rows)
+    })
+  })
+})
+
+// Selected
+router.post('/selected/:id', (req, res, next ) => {
+  knex.raw(`update emails set selected = not selected where id = ${req.params.id}`)
   .then(data => {
     knex.raw(`SELECT * FROM emails`)
     .then(data => {
