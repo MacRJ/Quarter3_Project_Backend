@@ -11,6 +11,7 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 var emails = require('./routes/emails');
 var notes = require('./routes/notes');
+var reply = require('./routes/reply')
 
 var app = express();
 
@@ -31,7 +32,8 @@ app.use(cookieParser());
 app.use('/', index);
 app.use('/users', users);
 app.use('/emails', emails);
-app.use('/notes', notes)
+app.use('/notes', notes);
+app.use('/reply', reply)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
