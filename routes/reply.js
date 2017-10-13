@@ -44,10 +44,12 @@ router.post('/delete/:id', (req, res, next) => {
 })
 
 // update time
-router.post('/time/:id', (req,res,next) => {
+router.post('/time/:id/:time', (req,res,next) => {
 
-  let date = new Date(0, 0, 0, req.params.id, 0, 0, 0);
+  let date = new Date(0, 0, 0, 1, 0, 0, 0);
 console.log('theNewDate', date)
+console.log('req.params.id', req.params.id)
+console.log('req.params.time', req.params.time)
 
   knex.raw(`UPDATE reply set reply_time = ${req.body.id} where replyid = ${req.body.id}`)
   .then(data => {
