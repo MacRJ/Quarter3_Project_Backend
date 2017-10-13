@@ -34,7 +34,6 @@ router.post('/update', (req, res, next) => {
 // Delete Reply
 
 router.post('/delete/:id', (req, res, next) => {
-  console.log('theDelete', req.params.id)
   knex.raw(`DELETE FROM reply WHERE replyid = ${req.params.id}`)
   .then(data => {
     knex.raw(`SELECT * FROM reply RIGHT JOIN emails ON reply.email_id = emails.id WHERE reply IS NOT null ORDER BY id`)
@@ -43,5 +42,21 @@ router.post('/delete/:id', (req, res, next) => {
   })
 })
 })
+
+// update time
+router.post('/time/:id', (req,res,next) => {
+
+  let date = new Date(0, 0, 0, req.params.id, 0, 0, 0);
+console.log('theNewDate', date)
+
+  knex.raw(`UPDATE reply set reply_time = ${req.body.id} where replyid = ${req.body.id}`)
+  .then(data => {
+    knex.raw(`SELECT * FROM reply RIGHT JOIN emails ON reply.email_id = emails.id WHERE reply IS NOT null ORDER BY id`)
+    .then(data => {
+      res.json(data.rows)
+  })
+  })
+})
+
 
 module.exports = router;
